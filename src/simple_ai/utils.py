@@ -32,7 +32,7 @@ def format_autocompletion_stream_response(
         "model": model_name,
         "choices": [
             {"text": pridiction['text'], "index": idx, "logprobs": pridiction['logprobs'], "finish_reason": pridiction['finish_reason']}
-            for idx, pridiction in enumerate(predictions)
+            for idx, pridiction in enumerate(json.loads(predictions))
         ],
     }
 
