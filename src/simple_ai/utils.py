@@ -15,8 +15,8 @@ def format_autocompletion_response(model_name, predictions, usage=dummy_usage) -
         "created": current_timestamp,
         "model": model_name,
         "choices": [
-            {"text": text, "index": idx, "logprobs": None, "finish_reason": ""}
-            for idx, text in enumerate(predictions)
+            {"text": pridiction['text'], "index": idx, "logprobs": pridiction['logprobs'], "finish_reason": pridiction['finish_reason']}
+            for idx, pridiction in enumerate(json.loads(predictions))
         ],
         "usage": usage,
     }
