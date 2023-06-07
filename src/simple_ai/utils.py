@@ -8,7 +8,7 @@ from .dummy import dummy_usage
 def format_autocompletion_response(model_name, predictions, usage=dummy_usage) -> dict:
     response_id = uuid.uuid4()
     current_timestamp = int(dt.now().timestamp())
-
+    predictions = [json.loads(prediction) for prediction in predictions]
     return {
         "id": response_id,
         "object": "text_completion",
@@ -16,7 +16,7 @@ def format_autocompletion_response(model_name, predictions, usage=dummy_usage) -
         "model": model_name,
         "choices": [
             {"text": pridiction['text'], "index": idx, "logprobs": pridiction['logprobs'], "finish_reason": pridiction['finish_reason']}
-            for idx, pridiction in enumerate(json.loads(predictions))
+            for idx, pridiction in enumerate(predictions)
         ],
         "usage": usage,
     }
@@ -25,6 +25,7 @@ def format_autocompletion_response(model_name, predictions, usage=dummy_usage) -
 def format_autocompletion_stream_response(
     current_timestamp, response_id, model_name, predictions
 ) -> dict:
+    predictions = [json.loads(prediction) for prediction in predictions]
     data = {
         "id": response_id,
         "object": "text_completion",
@@ -32,7 +33,7 @@ def format_autocompletion_stream_response(
         "model": model_name,
         "choices": [
             {"text": pridiction['text'], "index": idx, "logprobs": pridiction['logprobs'], "finish_reason": pridiction['finish_reason']}
-            for idx, pridiction in enumerate(json.loads(predictions))
+            for idx, pridiction in enumerate(predictions)
         ],
     }
 
