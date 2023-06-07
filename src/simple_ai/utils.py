@@ -31,8 +31,8 @@ def format_autocompletion_stream_response(
         "created": current_timestamp,
         "model": model_name,
         "choices": [
-            {"text": text, "index": idx, "logprobs": None, "finish_reason": None}
-            for idx, text in enumerate(predictions)
+            {"text": pridiction['text'], "index": idx, "logprobs": pridiction['logprobs'], "finish_reason": pridiction['finish_reason']}
+            for idx, pridiction in enumerate(predictions)
         ],
     }
 
