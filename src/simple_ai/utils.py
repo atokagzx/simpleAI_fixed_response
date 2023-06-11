@@ -8,7 +8,7 @@ from .dummy import dummy_usage
 def format_autocompletion_response(model_name, predictions, usage=dummy_usage) -> dict:
     response_id = uuid.uuid4()
     current_timestamp = int(dt.now().timestamp())
-    predictions = [json.loads(prediction) for prediction in predictions]
+    predictions = json.loads(predictions[0])
     return {
         "id": response_id,
         "object": "text_completion",
@@ -25,7 +25,7 @@ def format_autocompletion_response(model_name, predictions, usage=dummy_usage) -
 def format_autocompletion_stream_response(
     current_timestamp, response_id, model_name, predictions
 ) -> dict:
-    predictions = [json.loads(prediction) for prediction in predictions]
+    predictions = json.loads(predictions[0])
     data = {
         "id": response_id,
         "object": "text_completion",
